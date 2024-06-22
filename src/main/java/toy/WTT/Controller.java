@@ -16,7 +16,7 @@ public class Controller {
 
     @GetMapping("/")
     public String mainPage(){
-        return "this is main page";
+        return "this is main page123";
     }
 
     @PostMapping("/add")
