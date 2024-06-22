@@ -21,7 +21,6 @@ public class Service {
     private final MemberRepository memberRepository;
 
     public void add(String time, String id, String startDate){
-
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("HH:mm:ss.SS");
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
