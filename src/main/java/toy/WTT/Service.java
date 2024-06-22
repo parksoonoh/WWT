@@ -21,14 +21,11 @@ public class Service {
     private final MemberRepository memberRepository;
 
     public void add(String time, String id, String startDate){
-        time = time.replace("\"","");
-        log.info("insert " + time);
 
-        // DateTimeFormatter를 사용하여 문자열을 파싱
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate date = LocalDate.parse(startDate, formatter);
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("HH:mm:ss");
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        workTimeRepository.save(new WorkTime(LocalTime.parse(time, formatter), id, date));
+        workTimeRepository.save(new WorkTime(LocalTime.parse(time, formatter1), id, LocalDate.parse(startDate, formatter2)));
     }
 
     public String login(String id){
