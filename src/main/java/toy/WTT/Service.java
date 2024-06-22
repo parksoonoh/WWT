@@ -22,7 +22,7 @@ public class Service {
 
     public void add(String time, String id, String startDate){
 
-        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("HH:mm:ss");
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("HH:mm:ss.SS");
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         workTimeRepository.save(new WorkTime(LocalTime.parse(time, formatter1), id, LocalDate.parse(startDate, formatter2)));
