@@ -25,6 +25,6 @@ public class Controller {
 
     @PostMapping("/add")
     public void add(@RequestBody AddForm addForm){
-        service.add(addForm.getDuration(), addForm.getId());
+        service.add(addForm.getDuration(), addForm.getId(), addForm.getStartDate());
     }
 }

@@ -7,6 +7,7 @@ import toy.WTT.entity.WorkTime;
 import toy.WTT.repository.MemberRepository;
 import toy.WTT.repository.WorkTimeRepository;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
@@ -18,11 +19,11 @@ public class Service {
     private final WorkTimeRepository workTimeRepository;
     private final MemberRepository memberRepository;
 
-    public void add(String time, String id){
+    public void add(String time, String id, LocalDateTime startDate){
         time = time.replace("\"","");
         log.info("insert " + time);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss.SS");
-        workTimeRepository.save(new WorkTime(LocalTime.parse(time, formatter), id));
+        workTimeRepository.save(new WorkTime(LocalTime.parse(time, formatter), id, startDate));
     }
 
     public String login(String id){

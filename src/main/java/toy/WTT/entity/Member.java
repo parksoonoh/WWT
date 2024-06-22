@@ -14,6 +14,4 @@ import java.time.LocalTime;
 public class Member {
     @Id
     private String id;
-
-    private String password;
 }
