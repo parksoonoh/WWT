@@ -1,11 +1,9 @@
 package toy.WTT;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,8 +17,14 @@ public class Controller {
         return "this is main page123";
     }
 
+    @PostMapping("/login")
+    public String login(@RequestBody LoginForm loginForm){
+        log.info(loginForm.getId());
+        return service.login(loginForm.getId());
+    }
+
     @PostMapping("/add")
-    public void add(@RequestBody String time){
-        service.add(time);
+    public void add(@RequestBody AddForm addForm){
+        service.add(addForm.getDuration(), addForm.getId());
     }
 }
