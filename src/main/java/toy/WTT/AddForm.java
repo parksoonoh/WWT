@@ -8,5 +8,5 @@ import java.time.LocalDateTime;
 public class AddForm {
     private String duration;
     private String id;
-    private LocalDateTime startDate;
+    private String startDate;
 }

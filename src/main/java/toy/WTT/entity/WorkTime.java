@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
@@ -18,9 +19,9 @@ public class WorkTime {
 
     private LocalTime workTime;
     private String userId;
-    private LocalDateTime startDate;
+    private LocalDate startDate;
 
-    public WorkTime(LocalTime workTime, String userId, LocalDateTime startDate) {
+    public WorkTime(LocalTime workTime, String userId, LocalDate startDate) {
         this.workTime = workTime;
         this.userId = userId;
         this.startDate = startDate;

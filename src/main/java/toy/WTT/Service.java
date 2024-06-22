@@ -7,6 +7,7 @@ import toy.WTT.entity.WorkTime;
 import toy.WTT.repository.MemberRepository;
 import toy.WTT.repository.WorkTimeRepository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -19,11 +20,15 @@ public class Service {
     private final WorkTimeRepository workTimeRepository;
     private final MemberRepository memberRepository;
 
-    public void add(String time, String id, LocalDateTime startDate){
+    public void add(String time, String id, String startDate){
         time = time.replace("\"","");
         log.info("insert " + time);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss.SS");
-        workTimeRepository.save(new WorkTime(LocalTime.parse(time, formatter), id, startDate));
+
+        // DateTimeFormatter를 사용하여 문자열을 파싱
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(startDate, formatter);
+
+        workTimeRepository.save(new WorkTime(LocalTime.parse(time, formatter), id, date));
     }
 
     public String login(String id){
