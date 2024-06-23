@@ -21,17 +21,19 @@ public class Service {
     private final MemberRepository memberRepository;
 
     public void add(String time, String userId, String startDate){
-
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("HH:mm:ss.SS");
         LocalTime timeFormatted = LocalTime.parse(time, formatter1);
+
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate dateFormatted = LocalDate.parse(startDate, formatter2);
 
-        Optional<WorkTime> findWT = workTimeRepository.findByUserIdAndStartDate(userId, dateFormatted);
-        if (findWT.isEmpty()) {
+        Optional<WorkTime> findWTOpt = workTimeRepository.findByUserIdAndStartDate(userId, dateFormatted);
+        if (findWTOpt.isEmpty()) {
             workTimeRepository.save(new WorkTime(timeFormatted, userId, dateFormatted));
         }else{
-            findWT.get().increaseTime(timeFormatted);
+            WorkTime findWT = findWTOpt.get();
+            findWT.increaseTime(timeFormatted);
+            workTimeRepository.save(findWT);
         }
     }
 
