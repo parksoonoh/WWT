@@ -22,8 +22,8 @@ public class Controller {
 
     @PostMapping("/login")
     public String login(@RequestBody LoginForm loginForm){
-        log.info(loginForm.getId());
-        return service.login(loginForm.getId());
+        log.info(loginForm.getUserId());
+        return service.login(loginForm.getUserId());
     }
 
     @PostMapping("/add")

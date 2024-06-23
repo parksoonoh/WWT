@@ -24,15 +24,15 @@ public class Service {
 
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("HH:mm:ss.SS");
         LocalTime timeFormatted = LocalTime.parse(time, formatter1);
-
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate dateFormatted = LocalDate.parse(startDate, formatter2);
 
         Optional<WorkTime> findWT = workTimeRepository.findByUserIdAndStartDate(userId, dateFormatted);
         if (findWT.isEmpty()) {
             workTimeRepository.save(new WorkTime(timeFormatted, userId, dateFormatted));
+        }else{
+            findWT.get().increaseTime(timeFormatted);
         }
-        findWT.get().increaseTime(timeFormatted);
     }
 
     public String login(String id){
