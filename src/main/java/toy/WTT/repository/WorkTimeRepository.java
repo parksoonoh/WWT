@@ -9,7 +9,6 @@ import java.util.Optional;
 
 @org.springframework.stereotype.Repository
 public interface WorkTimeRepository extends JpaRepository<WorkTime, Long> {
-    Optional<WorkTime> findByIdAndStartDate(String id, LocalDate time);
-
-    List<WorkTime> findByUserId(String userId);
+    Optional<WorkTime> findByUserIdAndStartDate(String userId, LocalDate startDate);
+    List<WorkTime> findAllByUserId(String userId);
 }

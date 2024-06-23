@@ -7,6 +7,6 @@ import java.time.LocalDateTime;
 @Getter
 public class AddForm {
     private String duration;
-    private String id;
+    private String userId;
     private String startDate;
 }

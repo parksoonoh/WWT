@@ -20,7 +20,7 @@ public class Service {
     private final WorkTimeRepository workTimeRepository;
     private final MemberRepository memberRepository;
 
-    public void add(String time, String id, String startDate){
+    public void add(String time, String userId, String startDate){
 
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("HH:mm:ss.SS");
         LocalTime timeFormatted = LocalTime.parse(time, formatter1);
@@ -28,9 +28,9 @@ public class Service {
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate dateFormatted = LocalDate.parse(startDate, formatter2);
 
-        Optional<WorkTime> findWT = workTimeRepository.findByIdAndStartDate(id, dateFormatted);
+        Optional<WorkTime> findWT = workTimeRepository.findByUserIdAndStartDate(userId, dateFormatted);
         if (findWT.isEmpty()) {
-            workTimeRepository.save(new WorkTime(timeFormatted, id, dateFormatted));
+            workTimeRepository.save(new WorkTime(timeFormatted, userId, dateFormatted));
         }
         findWT.get().increaseTime(timeFormatted);
     }
@@ -44,6 +44,6 @@ public class Service {
     }
 
     public List<WorkTime> getWorkTime(String userId){
-        return workTimeRepository.findByUserId(userId);
+        return workTimeRepository.findAllByUserId(userId);
     }
 }
