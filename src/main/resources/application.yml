@@ -6,9 +6,9 @@ spring:
       max-request-size: 10MB
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://wtt.cxw40ooka8b9.ap-northeast-2.rds.amazonaws.com:3306/wtt
+    url:
     username: admin
-    password: VmDoR9QgikwFffs3
+    password:
   jpa:
     hibernate:
       ddl-auto: update
