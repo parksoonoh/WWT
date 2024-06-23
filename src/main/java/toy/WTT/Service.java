@@ -8,9 +8,9 @@ import toy.WTT.repository.MemberRepository;
 import toy.WTT.repository.WorkTimeRepository;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
 
 @org.springframework.stereotype.Service
@@ -21,10 +21,18 @@ public class Service {
     private final MemberRepository memberRepository;
 
     public void add(String time, String id, String startDate){
-        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("HH:mm:ss.SS");
-        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        workTimeRepository.save(new WorkTime(LocalTime.parse(time, formatter1), id, LocalDate.parse(startDate, formatter2)));
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("HH:mm:ss.SS");
+        LocalTime timeFormatted = LocalTime.parse(time, formatter1);
+
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dateFormatted = LocalDate.parse(startDate, formatter2);
+
+        Optional<WorkTime> findWT = workTimeRepository.findByIdAndStartDate(id, dateFormatted);
+        if (findWT.isEmpty()) {
+            workTimeRepository.save(new WorkTime(timeFormatted, id, dateFormatted));
+        }
+        findWT.get().increaseTime(timeFormatted);
     }
 
     public String login(String id){
@@ -33,5 +41,9 @@ public class Service {
             return "false";
         }
         return "true";
+    }
+
+    public List<WorkTime> getWorkTime(String userId){
+        return workTimeRepository.findByUserId(userId);
     }
 }

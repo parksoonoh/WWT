@@ -26,4 +26,11 @@ public class WorkTime {
         this.userId = userId;
         this.startDate = startDate;
     }
+
+    public void increaseTime(LocalTime increaseTime){
+        this.workTime = workTime.plusHours(increaseTime.getHour())
+                .plusMinutes(increaseTime.getMinute())
+                .plusSeconds(increaseTime.getSecond())
+                .plusNanos(increaseTime.getNano());
+    }
 }

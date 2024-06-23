@@ -4,6 +4,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import toy.WTT.entity.WorkTime;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,5 +29,10 @@ public class Controller {
     @PostMapping("/add")
     public void add(@RequestBody AddForm addForm){
         service.add(addForm.getDuration(), addForm.getId(), addForm.getStartDate());
+    }
+
+    @GetMapping("/worktime")
+    public List<WorkTime> workTime(@RequestParam("userId") String userId){
+        return service.getWorkTime(userId);
     }
 }
